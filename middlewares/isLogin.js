@@ -8,11 +8,11 @@ const isLogin = async (req, res, next) => {
   const decodedUser = verifyToken(token);
   req.user = decodedUser.id;
   if (!decodedUser) {
-    return next(new AppErr("Invalid/Expired Token, Please Login Again", 401));
+    return next(AppErr("Invalid/Expired Token, Please Login Again", 401));
   }
   const userExist = await User.findById(req.user);
   if (!userExist) {
-    return next(new AppErr("User does not exist, Please Login Again", 401));
+    return next(AppErr("User does not exist, Please Login Again", 401));
   }
   next();
 };
